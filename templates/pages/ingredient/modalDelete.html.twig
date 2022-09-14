@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+       {% block title %} <h5 class="modal-title">Confirmation Suppression</h5> {% endblock %}
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Etes vous sur de vouloir supprimer cet ingrédient ?</p>
+      </div>
+      <div class="modal-footer">
+        <td><a href="{{path('ingredient.delete',{id : ingredient.id})}}" class="btn btn-danger">Oui</a></td> 
+         <td><a href="{{path('ingredient.index')}}" class="btn btn-secondary">Non</a></td> 
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

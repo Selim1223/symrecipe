@@ -55,6 +55,7 @@ class RecipeController extends AbstractController
 
             $manager->persist($recipe);
             $manager->flush();
+            
 
             $this->addFlash(
                 'success',

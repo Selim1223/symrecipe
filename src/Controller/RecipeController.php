@@ -70,9 +70,14 @@ class RecipeController extends AbstractController
 
     }
 
-     /**
-    * this function show a form which edit a recipe
-    */
+    /**
+     * this function show a form which edit a recipe
+     *
+     * @param Recipe $recipe
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @return Response
+     */
     #[Route('recipe/edition/{id}','recipe.edit',methods:['GET', 'POST'])]
     public function edit(Recipe $recipe, Request $request, EntityManagerInterface $manager): Response {
 
@@ -98,8 +103,12 @@ class RecipeController extends AbstractController
         ]);
     }
 
-     /**
+    /**
      * this function delete a recipe
+     *
+     * @param Recipe $recipe
+     * @param EntityManagerInterface $manager
+     * @return Response
      */
     #[Route('recipe/suppression/{id}','recipe.delete',methods:['GET'])]
     public function delete(Recipe $recipe,EntityManagerInterface $manager) : Response {

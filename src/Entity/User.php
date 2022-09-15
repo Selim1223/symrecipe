@@ -3,8 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
-use DateTime;
-use DateTimeImmutable;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -18,43 +17,48 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    #[ORM\Column(type: 'integer')]
+    private ?int $id;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(type: 'string', length: 50)]
     #[Assert\NotBlank()]
     #[Assert\Length(min: 2, max: 50)]
-    private ?string $fullName = null;
+    private string $fullName;
 
-    #[ORM\Column(length: 50, nullable: true)]
+    #[ORM\Column(type: 'string', length: 50, nullable: true)]
     #[Assert\Length(min: 2, max: 50)]
     private ?string $pseudo = null;
 
-    #[ORM\Column(length: 180, unique: true)]
+    #[ORM\Column(type: 'string', length: 180, unique: true)]
     #[Assert\Email()]
     #[Assert\Length(min: 2, max: 180)]
-    private ?string $email = null;
+    private string $email;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'json')]
     #[Assert\NotNull()]
     private array $roles = [];
 
-    private ?string $plainpassword = null;
+    private ?string $plainPassword = null;
 
-    /**
-     * @var string The hashed password
-     */
-    #[ORM\Column]
+    #[ORM\Column(type: 'string')]
     #[Assert\NotBlank()]
-    private ?string $password = 'password';
+    private string $password = 'password';
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'datetime_immutable')]
     #[Assert\NotNull()]
-    private ?\DateTimeImmutable $createdAt = null;
+    private \DateTimeImmutable $createdAt;
+
+    #[ORM\Column(type: 'datetime_immutable')]
+    #[Assert\NotNull()]
+    private \DateTimeImmutable $updatedAt;
 
     public function __construct()
     {
-        return $this->createdAt = new \DateTimeImmutable();
+        $this->createdAt = new \DateTimeImmutable();
+        $this->updatedAt = new \DateTimeImmutable();
+        $this->ingredients = new ArrayCollection();
+        $this->recipes = new ArrayCollection();
+        $this->marks = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -85,7 +89,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
 
     public function getEmail(): ?string
     {
@@ -127,22 +130,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-     /**
-     * Get the value of plainpassword
-     */ 
-    public function getPlainpassword()
+    /**
+     * Get the value of plainPassword
+     */
+    public function getPlainPassword()
     {
-        return $this->plainpassword;
+        return $this->plainPassword;
     }
 
     /**
-     * Set the value of plainpassword
+     * Set the value of plainPassword
      *
      * @return  self
-     */ 
-    public function setPlainpassword($plainpassword)
+     */
+    public function setPlainPassword($plainPassword)
     {
-        $this->plainpassword = $plainpassword;
+        $this->plainPassword = $plainPassword;
 
         return $this;
     }
@@ -183,5 +186,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-   
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
 }

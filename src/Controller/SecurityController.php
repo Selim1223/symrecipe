@@ -14,7 +14,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SecurityController extends AbstractController
 {
     /**
-     * connexion function 
+     * this function allow us to login 
      *
      * @param AuthenticationUtils $authenticationUtils
      * @return Response
@@ -29,7 +29,7 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * disconnexion function
+     * this function allow us to logout
      *
      * @return void
      */
@@ -40,6 +40,14 @@ class SecurityController extends AbstractController
     }
 
 
+
+    /**
+     * this function allow us to sign up
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @return Response
+     */
     #[Route('/inscription', name: 'security.registration', methods:['GET','POST'])]
     public function registration(Request $request, EntityManagerInterface $manager):Response 
     {

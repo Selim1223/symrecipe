@@ -301,4 +301,5 @@ class Recipe
         $this->average = $total / count($marks);
         return $this->average;
     }
+    
 }

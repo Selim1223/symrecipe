@@ -96,7 +96,6 @@ class RecipeController extends AbstractController
                 );
     
                 return $this->redirectToRoute('recipe.show', ['id' => $recipe->getId()]);
-    
         }
 
         return $this->render('pages/recipe/show.html.twig', [

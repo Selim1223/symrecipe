@@ -7,7 +7,6 @@ use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -27,7 +26,7 @@ class ContactCrudController extends AbstractCrudController
 
             ->setPageTitle("index", "SymRecipe - Administration des demandes de contact")
 
-            ->setPaginatorPageSize(20)
+            ->setPaginatorPageSize(15)
 
             ->addFormTheme('@FOSCKEditor/Form/ckeditor_widget.html.twig');
     }
@@ -37,7 +36,8 @@ class ContactCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id')
-                ->hideOnIndex(),
+                ->hideOnIndex()
+                ->hideOnForm(),
             TextField::new('fullName'),
             TextField::new('email'),
             TextareaField::new('message')

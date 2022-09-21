@@ -4,6 +4,8 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use App\Entity\Contact;
+use App\Entity\Ingredient;
+use App\Entity\Recipe;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -30,8 +32,11 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Page d\'accueil', 'fa fa-home');
-        yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-user', User::class);
+        yield MenuItem::linkToCrud('Gestion des utilisateurs', 'fas fa-user', User::class);
+        yield MenuItem::linkToCrud('Gestion des ingredients', 'fa-solid fa-apple-whole', Ingredient::class);
+        yield MenuItem::linkToCrud('Gestion des recettes', 'fas fa-utensils', Recipe::class);
         yield MenuItem::linkToCrud('Demandes de contact', 'fas fa-envelope', Contact::class);
-
+       
+        
     }
 }

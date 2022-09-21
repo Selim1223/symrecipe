@@ -29,7 +29,7 @@ Symrecipe - voir une recette
         {% if recipe.nbPeople == null %}
             <p class="mt-2">Temps non renseigné </p>
         {% else %}
-             <p class="mt-2">Temps (en minute) {{recipe.time}} min </p>
+             <p class="mt-2">Temps (en minute) {{ recipe.time|min_to_hour }}</p> 
         {% endif %}
        
         {% if recipe.nbPeople == null %}

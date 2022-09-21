@@ -65,7 +65,7 @@ class IngredientController extends AbstractController
 
             $this->addFlash(
                 'success',
-                'Votre ingrédient a été ajouté avec succès !'
+                'Votre ingrédient a été créé avec succès !'
             );
 
            return $this->redirectToRoute('ingredient.index');
